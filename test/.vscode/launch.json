@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/media/bruno/80AE20A8AE2098A4/Users/brunocp/Documents/citm/cursos/Programacio II/code/test",
-      "program": "/media/bruno/80AE20A8AE2098A4/Users/brunocp/Documents/citm/cursos/Programacio II/code/test/build/Debug/outDebug",
+      "cwd": "/media/bruno/80AE20A8AE2098A4/Users/brunocp/Documents/citm/cursos/Programacio II/code/reference_1.1",
+      "program": "/media/bruno/80AE20A8AE2098A4/Users/brunocp/Documents/citm/cursos/Programacio II/code/reference_1.1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
