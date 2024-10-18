@@ -10,43 +10,49 @@ using namespace std;
 const int ARRAY_SIZE = 20;
 
 
-struct treasureMap_struct {
+class TreasureMapClass {
+private:
     char charMap[ARRAY_SIZE];
+
+public:
     int treasure;
     int player;
+    void initialize () {
+        for (int i = 0; i < ARRAY_SIZE; i++) {
+            *(charMap + i) = '.';
+        }
+
+        // Place the treasure
+        treasure = std::rand() % ARRAY_SIZE;
+        *(charMap + treasure) = 'T';
+
+        //place the player at the leftmost position
+        *(charMap) = '@';
+        player = 0;
+
+
+    };
+    void print() {
+        for (char* i = charMap; i < charMap + ARRAY_SIZE; i++) {
+            cout << *i;
+        }
+        cout << std::endl;
+    }
 };
 
-void printMap(treasureMap_struct map) {
-    for (char* i = map.charMap; i < map.charMap + ARRAY_SIZE; i++) {
-        cout << *i;
-    }
-    cout << std::endl;
-}
 
 int main() {
     srand(std::time(nullptr));
 
-    treasureMap_struct treasureMap;
-    for (int i = 0; i < ARRAY_SIZE; i++) {
-        *(treasureMap.charMap + i) = '.';
-    }
+    TreasureMapClass treasureMap;
 
-    printMap(treasureMap);
-
-    // Place the treasure
-    treasureMap.treasure = std::rand() % ARRAY_SIZE;
-    *(treasureMap.charMap + treasureMap.treasure) = 'T';
-    *(treasureMap.charMap) = '@';
-
-
-    treasureMap.player = 0;
-
+    treasureMap.initialize();
 
     cout << "Find the treasure (T)." << endl;
     cout << "Commands: 'a' to move left, 'd' to move right, 'q' to quit." << endl << endl;
 
     while (true) {
-        printMap(treasureMap);
+    treasureMap.print();
 
         if (treasureMap.player == treasureMap.treasure) {
             std::cout << "Congratulations! You found the treasure!" << endl;
@@ -57,35 +63,35 @@ int main() {
         cout << "Enter your move: ";
         cin >> move;
 
-        switch (move) {
-        case 'a':
-            if (treasureMap.player > 0) {
-                *(treasureMap.charMap + treasureMap.player) = '.';
-                treasureMap.player--;
-                *(treasureMap.charMap + treasureMap.player) = '@';
-                cout << "Moved left by 1 (pointer arithmetic: playerPtr--)." <<  endl;
-            }
-            else {
-                 cout << "Can't move left. You're at the start of the array." <<  endl;
-            }
-            break;
-        case 'd':
-            if (treasureMap.player < ARRAY_SIZE - 1) {
-                *(treasureMap.charMap + treasureMap.player) = '.';
-                treasureMap.player++;
-                *(treasureMap.charMap + treasureMap.player) = '@';
-                cout << "Moved right by 1 (pointer arithmetic: playerPtr++)." << endl;
-            }
-            else {
-                cout << "Can't move right. You're at the end of the array." <<  endl;
-            }
-            break;
-        case 'q':
-             cout << "Thanks for playing!" <<  endl;
-            return 0;
-        default:
-            cout << "Invalid move. Use 'a' for left, 'd' for right, or 'q' to quit." <<  endl;
-        }
+        // switch (move) {
+        // case 'a':
+        //     if (treasureMap.player > 0) {
+        //         *(treasureMap.charMap + treasureMap.player) = '.';
+        //         treasureMap.player--;
+        //         *(treasureMap.charMap + treasureMap.player) = '@';
+        //         cout << "Moved left by 1 (pointer arithmetic: playerPtr--)." <<  endl;
+        //     }
+        //     else {
+        //          cout << "Can't move left. You're at the start of the array." <<  endl;
+        //     }
+        //     break;
+        // case 'd':
+        //     if (treasureMap.player < ARRAY_SIZE - 1) {
+        //         *(treasureMap.charMap + treasureMap.player) = '.';
+        //         treasureMap.player++;
+        //         *(treasureMap.charMap + treasureMap.player) = '@';
+        //         cout << "Moved right by 1 (pointer arithmetic: playerPtr++)." << endl;
+        //     }
+        //     else {
+        //         cout << "Can't move right. You're at the end of the array." <<  endl;
+        //     }
+        //     break;
+        // case 'q':
+        //      cout << "Thanks for playing!" <<  endl;
+        //     return 0;
+        // default:
+        //     cout << "Invalid move. Use 'a' for left, 'd' for right, or 'q' to quit." <<  endl;
+        // }
 
 
          cout << "Current position in array: " << treasureMap.player <<  endl;
