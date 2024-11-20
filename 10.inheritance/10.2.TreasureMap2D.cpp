@@ -77,7 +77,8 @@ public:
         return true;
     }
 
-    bool checkTreasure() {
+    virtual bool checkTreasure() {
+        cout << "base class" << endl;
         if ((player_x == treasure_x)) {
             return true;
         }
@@ -188,7 +189,7 @@ public:
     }
 
 
-    bool checkTreasure() {
+    bool checkTreasure() override {
         if ((player_x == treasure_x) && (player_y == treasure_y)) {
             return true;
         }
