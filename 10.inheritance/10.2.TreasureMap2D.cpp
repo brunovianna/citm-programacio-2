@@ -19,8 +19,8 @@ private:
     char charMap[ARRAY_SIZE]{};
 
 public:
-    int treasure;
-    int player;
+    int treasure_x;
+    int player_x;
     TreasureMapClass() {
 
         for (int i = 0; i < ARRAY_SIZE; i++) {
@@ -29,13 +29,13 @@ public:
         }
 
         // Place the treasure
-        treasure = std::rand() % ARRAY_SIZE;
-        charMap[treasure] = 'T';
+        treasure_x = std::rand() % ARRAY_SIZE;
+        charMap[treasure_x] = 'T';
 
         //place the player at the leftmost position
-        player = 0;
+        player_x = 0;
 
-        charMap[player] = '@';
+        charMap[player_x] = '@';
 
     }
     void print() {
@@ -47,11 +47,11 @@ public:
         bool move(char m) {
         switch (m) {
         case 'a':
-            if (player > 0) {
-                charMap[player] = '.';
+            if (player_x > 0) {
+                charMap[player_x] = '.';
 
-                player--;
-                charMap[player] = '@';
+                player_x--;
+                charMap[player_x] = '@';
                 cout << "Moved left by 1" <<  endl;
             }
             else {
@@ -59,11 +59,11 @@ public:
             }
             break;
         case 'd':
-            if (player < ARRAY_SIZE-1) {
-                charMap[player] = '.';
+            if (player_x < ARRAY_SIZE-1) {
+                charMap[player_x] = '.';
 
-                player++;
-                charMap[player] = '@';
+                player_x++;
+                charMap[player_x] = '@';
                 cout << "Moved right by 1" << endl;
             }
             else {
@@ -78,7 +78,7 @@ public:
     }
 
     bool checkTreasure() {
-        if ((player == treasure)) {
+        if ((player_x == treasure_x)) {
             return true;
         }
         else {
@@ -95,8 +95,8 @@ private:
     char charMap2D[ARRAY_X][ARRAY_Y];
 
 public:
-    int treasure_x, treasure_y;
-    int player_x, player_y;
+    int treasure_y;
+    int player_y;
     TreasureMapClass2D() {
 
         for (int j=0;j< ARRAY_Y; j++) {
