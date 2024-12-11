@@ -4,14 +4,6 @@
 #include <iostream>
 
 class List {
-public:
-    List();
-    ~List();
-
-    void push_back(const int& value);
-    void insert(unsigned int position, const int& value);
-    void print() const;
-
 private:
     struct Node {
         int value;
@@ -23,6 +15,16 @@ private:
     Node* first = nullptr;
     Node* last = nullptr;
     unsigned int num_elems = 0;
+
+public:
+    List();
+    ~List();
+
+    void push_back(const int& value);
+    void insert(unsigned int position, const int& value);
+    void print() const;
+
+
 };
 
 List::List() : first(nullptr), last(nullptr), num_elems(0) {}
@@ -89,6 +91,10 @@ void List::print() const {
         current = current->next;
     }
     std::cout << std::endl;
+}
+
+void List::recursivePrint(Node current) const {
+
 }
 
 int main() {
