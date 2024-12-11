@@ -4,6 +4,7 @@
 #include <iostream>
 
 class List {
+
 private:
     struct Node {
         int value;
@@ -17,85 +18,87 @@ private:
     unsigned int num_elems = 0;
 
 public:
-    List();
-    ~List();
-
-    void push_back(const int& value);
-    void insert(unsigned int position, const int& value);
-    void print() const;
-
-
-};
-
-List::List() : first(nullptr), last(nullptr), num_elems(0) {}
-
-List::~List() {
-    while (first != nullptr) {
-        Node* temp = first;
-        first = first->next;
-        delete temp;
+    List() {
+        first = nullptr;
+        last = nullptr;
+        num_elems = 0;
     }
-}
-
-void List::push_back(const int& value) {
-    Node* newNode = new Node(value);
-    if (last == nullptr) {
-        first = last = newNode;
+    ~List() {
+        while (first != nullptr) {
+            Node* temp = first;
+            first = first->next;
+            delete temp;
+        }
     }
-    else {
-        last->next = newNode;
-        newNode->prev = last;
-        last = newNode;
-    }
-    num_elems++;
-}
 
-void List::insert(unsigned int position, const int& value) {
-    if (position == 0) {
+    void push_back(const int& value) {
         Node* newNode = new Node(value);
-        if (first == nullptr) {
+        if (last == nullptr) {
             first = last = newNode;
         }
         else {
-            newNode->next = first;
-            first->prev = newNode;
-            first = newNode;
+            last->next = newNode;
+            newNode->prev = last;
+            last = newNode;
         }
         num_elems++;
     }
-    else if (position >= num_elems) {
-        push_back(value);
+
+    void insert(unsigned int position, const int& value) {
+        if (position == 0) {
+            Node* newNode = new Node(value);
+            if (first == nullptr) {
+                first = last = newNode;
+            }
+            else {
+                newNode->next = first;
+                first->prev = newNode;
+                first = newNode;
+            }
+            num_elems++;
+        }
+        else if (position >= num_elems) {
+            push_back(value);
+        }
+        else {
+            Node* current = first;
+            unsigned int index = 0;
+            while (index < position) {
+                current = current->next;
+                index++;
+            }
+            Node* newNode = new Node(value);
+            newNode->next = current;
+            newNode->prev = current->prev;
+            if (current->prev != nullptr) {
+                current->prev->next = newNode;
+            }
+            current->prev = newNode;
+            num_elems++;
+        }
     }
-    else {
+    void print() const {
         Node* current = first;
-        unsigned int index = 0;
-        while (index < position) {
+        while (current != nullptr) {
+            std::cout << current->value << " ";
             current = current->next;
-            index++;
         }
-        Node* newNode = new Node(value);
-        newNode->next = current;
-        newNode->prev = current->prev;
-        if (current->prev != nullptr) {
-            current->prev->next = newNode;
-        }
-        current->prev = newNode;
-        num_elems++;
+        std::cout << std::endl;
+    };
+
+    void recursivePrint(Node current) const {
+
     }
-}
 
-void List::print() const {
-    Node* current = first;
-    while (current != nullptr) {
-        std::cout << current->value << " ";
-        current = current->next;
-    }
-    std::cout << std::endl;
-}
+};
 
-void List::recursivePrint(Node current) const {
 
-}
+
+
+
+
+
+
 
 int main() {
     List myList;
